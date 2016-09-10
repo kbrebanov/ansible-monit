@@ -1,6 +1,8 @@
 monit
 =====
 
+[![Build Status](https://travis-ci.org/kbrebanov/ansible-monit.svg?branch=master)](https://travis-ci.org/kbrebanov/ansible-monit)
+
 Installs and configures Monit.
 
 Requirements
