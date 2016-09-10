@@ -1,0 +1,18 @@
+---
+# handlers file for monit
+
+- name: restart monit
+  become: yes
+  service:
+    name: "{{ monit_service_name }}"
+    state: restarted
+  tags:
+    - monit
+
+- name: reload monit
+  become: yes
+  service:
+    name: "{{ monit_service_name }}"
+    state: reloaded
+  tags:
+    - monit

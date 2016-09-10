@@ -1,0 +1,13 @@
+---
+# tasks file for monit (Ubuntu specific)
+
+- name: Install monit packages
+  become: yes
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    state: present
+  with_items:
+    - "{{ monit_packages }}"
+  tags:
+    - monit

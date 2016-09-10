@@ -1,0 +1,15 @@
+galaxy_info:
+  author: Kevin Brebanov
+  description: Installs and configures Monit
+  company:
+  license: BSD
+  min_ansible_version: 1.9
+  github_branch: master
+  platforms:
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
+  galaxy_tags:
+    - monitoring
+dependencies: []

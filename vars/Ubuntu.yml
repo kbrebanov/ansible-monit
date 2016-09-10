@@ -1,0 +1,14 @@
+---
+# vars file for monit (Ubuntu specific)
+
+monit_packages:
+  - monit
+monit_service_name: monit
+monit_log_file: /var/log/monit.log
+monit_pid_file: /var/run/monit.pid
+monit_id_file: /var/lib/monit/id
+monit_state_file: /var/lib/monit/state
+monit_eventqueue_basedir: /var/lib/monit/events
+monit_include_dirs:
+  - /etc/monit/conf.d/*
+  - /etc/monit/conf-enabled/*

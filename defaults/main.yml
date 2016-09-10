@@ -1,0 +1,28 @@
+---
+# defaults file for monit
+
+monit_check_services_interval: 120
+monit_start_delay: 0
+
+monit_mailservers: []
+
+monit_eventqueue_slots: 100
+
+monit_mail_format_from: monit@$HOST
+monit_mail_format_subject: monit alert --  $EVENT $SERVICE
+monit_mail_format_message: |
+  $EVENT Service $SERVICE
+    Date: $DATE
+    Action: $ACTION
+    Host: $HOST
+    Description: $DESCRIPTION
+
+    Your faithful employee,
+    Monit
+
+monit_httpd_enabled: false
+monit_httpd_port: 2812
+monit_httpd_address: localhost
+monit_httpd_allow:
+  - localhost
+  - admin:monit

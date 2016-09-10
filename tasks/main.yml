@@ -1,0 +1,34 @@
+---
+# tasks file for monit
+
+- name: Include distribution specific variables
+  include_vars: "{{ ansible_distribution }}.yml"
+  tags:
+    - monit
+
+- name: Include distribution specific tasks
+  include: "{{ ansible_distribution }}.yml"
+  tags:
+    - monit
+
+- name: Template Monit configuration
+  become: yes
+  template:
+    src: monitrc.j2
+    dest: /etc/monit/monitrc
+    owner: root
+    group: root
+    mode: 0600
+  notify:
+    - reload monit
+  tags:
+    - monit
+
+- name: Ensure monit service is started and enabled on boot
+  become: yes
+  service:
+    name: "{{ monit_service_name }}"
+    enabled: yes
+    state: started
+  tags:
+    - monit
