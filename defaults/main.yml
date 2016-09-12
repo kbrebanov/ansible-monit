@@ -6,6 +6,9 @@ monit_start_delay: 0
 
 monit_mailservers: []
 
+monit_alert_email: ''
+monit_alert_email_not_on: []
+
 monit_eventqueue_slots: 100
 
 monit_mail_format_from: monit@$HOST

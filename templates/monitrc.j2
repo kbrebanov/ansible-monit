@@ -12,11 +12,79 @@ set statefile {{ monit_state_file }}
 set mailserver
 {% for mailserver in monit_mailservers %}
 {% if not loop.last %}
-  {{ mailserver.name }} port {{ mailserver.port }},
+  {{ mailserver.name }}
+{% if mailserver.port %}
+  port {{ mailserver.port }}
+{% endif %}
+{% if mailserver.username %}
+  username "{{ mailserver.username }}"
+{% endif %}
+{% if mailserver.password %}
+  password "{{ mailserver.password }}"
+{% endif %}
+{% if mailserver.ssl %}
+{% if mailserver.ssl.options %}
+  using ssl with options {
+{% for option in mailserver.ssl.options %}
+    {{ option.name }}: {{ option.value }}
+{% endfor %}
+  }
 {% else %}
-  {{ mailserver.name }} port {{ mailserver.port }}
+  using ssl
+{% endif %}
+{% endif %}
+{% if mailserver.timeout %}
+  with timeout {{ mailserver.timeout }} seconds
+{% endif %}
+{% if mailserver.use_hostname %}
+  using hostname "{{ mailserver.use_hostname }}"
+{% endif %}
+  ,
+{% else %}
+  {{ mailserver.name }}
+{% if mailserver.port %}
+  port {{ mailserver.port }}
+{% endif %}
+{% if mailserver.username %}
+  username "{{ mailserver.username }}"
+{% endif %}
+{% if mailserver.password %}
+  password "{{ mailserver.password }}"
+{% endif %}
+{% if mailserver.ssl %}
+{% if mailserver.ssl.options %}
+  using ssl with options {
+{% for option in mailserver.ssl.options %}
+    {{ option.name }}: {{ option.value }}
+{% endfor %}
+  }
+{% else %}
+  using ssl
+{% endif %}
+{% endif %}
+{% if mailserver.timeout %}
+  with timeout {{ mailserver.timeout }} seconds
+{% endif %}
+{% if mailserver.use_hostname %}
+  using hostname "{{ mailserver.use_hostname }}"
+{% endif %}
 {% endif %}
 {% endfor %}
+{% endif %}
+{% if monit_alert_email %}
+{% if monit_alert_email_not_on %}
+set alert {{ monit_alert_email }} but not on {
+{% for event in monit_alert_email_not_on %}
+{% if not loop.last %}
+  {{ event }},
+{% else %}
+  {{ event }}
+{% endif %}
+{% endfor %}
+}
+{% endif %}
+{% else %}
+set alert {{ monit_alert_email }}
 {% endif %}
 set eventqueue
   basedir {{ monit_eventqueue_basedir }}
