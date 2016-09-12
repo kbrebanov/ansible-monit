@@ -82,9 +82,9 @@ set alert {{ monit_alert_email }} but not on {
 {% endif %}
 {% endfor %}
 }
-{% endif %}
 {% else %}
 set alert {{ monit_alert_email }}
+{% endif %}
 {% endif %}
 set eventqueue
   basedir {{ monit_eventqueue_basedir }}
